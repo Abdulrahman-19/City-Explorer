@@ -13,14 +13,14 @@ export class App extends React.Component {
   }
   getLocation = async (e)=>{
     e.preventDefault();
-    const url = `https://us1.locationiq.com/v1/search.php?key=pk.b06e6a53ecfb212db970ffb1617832a6&q=${this.state.updateSearch}&format=json` ;
+    const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.updateSearch}&format=json` ;
     const req = await axios.get(url);
     let lat = req.data[0].lat;
     let lon = req.data[0].lon;
     console.log(req.data);
     this.setState({
       data : req.data[0],
-      imgSource: `https://maps.locationiq.com/v3/staticmap?key=pk.b06e6a53ecfb212db970ffb1617832a6&q=&center=${lat},${lon}&zoom=10`
+      imgSource: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=&center=${lat},${lon}&zoom=10`
     });
   };
   updateSearchQuery = (e) => {
